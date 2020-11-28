@@ -2,57 +2,68 @@
 
 # Users
 
-|Column    |Type      |Options
+|Column    |Type      |Options|
 |----------|----------| ---------|
 |email     |string    |Null: false|
-|password  |string    |Null: false|
+|encrypted_password  |string    |Null: false|
 |nickname      |string    |Null: false|
-|real_name   |string      |Null: false|
-|name_katakana|string      |Null: false|
-|birth_day  |integer      |Null: false|
-|birth_month  |integer      |Null: false|
-|birth_year  |integer      |Null: false|
-|item_id      |reference   |foreign key:true|
+|first_name   |string      |Null: false|
+|last_name   |string      |Null: false|
+|first_name_katakana   |string      |Null: false|
+|last_name_katakana|string      |Null: false|
+|birth  |date      |Null: false|
 
 ## Association
-- has_many :prototypes
+
+- has_many :items, through: :user_items
+- has_many :user_items
 - has_many :orders
 
 # Items
-|Column    |Type      |Options
+
+|Column    |Type      |Options|
 |----------|----------| ---------|
-|name     |string    |Null: false
-|item_detail|text      |Null: false|
-|category   |string      |Null: false|
-|status   |string      |Null: false|
-|shipping_changes   |string      |Null: false|
-|shipping_area   |string      |Null: false|
-|day_to_ship   |integer      |Null: false|
+|name     |string    |Null: false|
+|detail|text      |Null: false|
+|category_id   |integer      |Null: false|
+|status_id   |integer      |Null: false|
+|shipping_changes_id   |integer      |Null: false|
+|shipping_area_id   |integer      |Null: false|
+|day_to_ship_id   |integer      |Null: false|
 |price   |integer      |Null: false|
-|image     |Active Storage||
-|user_id      |reference |foreign key: true|
+|user      |references |foreign key: true|
 
 ## Association
-- has_many :users
+
+- has_many :users, through: :user_items
+- has_many :user_items
 - belongs_to :order
 
+# user_items
 
-# Orders
-|Column    |Type      |Options
+|Column    |Type      |Options|
 |----------|----------| ---------|
-|card_infomation     |string    |Null: false|
-|expiration_month     |string    |Null: false|
-|expiration_year     |string    |Null: false|
-|security_code     |string    |Null: false|
-|postal_code     |string    |Null: false|
-|prefectures     |text    |Null: false|
-|city     |text    |Null: false|
-|address     |text    |Null: false|
-|building     |text    |Null: false|
-|phone_number     |string    |Null: false|
-|user_id |reference   |foreign key:true|
-|item_id      |reference   |foreign key:true|
+|user |references   |foreign key:true|
+|item      |references   |foreign key:true|
 
 ## Association
+
 - belongs_to :user
-- belongs_to :Item
+- belongs_to :item
+
+# Orders
+
+|Column    |Type      |Options
+|----------|----------| ---------|
+|postal_code     |string    |Null: false|
+|prefectures_id     |integer    |Null: false|
+|city     |string    |Null: false|
+|address     |string    |Null: false|
+|building     |string    ||
+|phone_number     |string    |Null: false|
+
+
+## Association
+
+- belongs_to :user
+- has_one :Item
