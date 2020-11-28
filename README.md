@@ -15,8 +15,7 @@
 
 ## Association
 
-- has_many :items, through: :user_items
-- has_many :user_items
+- has_many :items
 - has_many :orders
 
 # Items
@@ -34,24 +33,23 @@
 |user      |references |foreign key: true|
 
 ## Association
-
-- has_many :users, through: :user_items
-- has_many :user_items
+- belongs_to :user
 - belongs_to :order
 
-# user_items
+# Orders
 
 |Column    |Type      |Options|
 |----------|----------| ---------|
-|user |references   |foreign key:true|
+|address |references   |foreign key:true|
 |item      |references   |foreign key:true|
 
 ## Association
 
 - belongs_to :user
 - belongs_to :item
+- has_one :address
 
-# Orders
+# Address
 
 |Column    |Type      |Options
 |----------|----------| ---------|
@@ -65,5 +63,4 @@
 
 ## Association
 
-- belongs_to :user
-- has_one :Item
+- belongs_to :order
