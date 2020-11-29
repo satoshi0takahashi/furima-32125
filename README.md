@@ -59,6 +59,7 @@
 |address     |string    |Null: false|
 |building     |string    ||
 |phone_number     |string    |Null: false|
+|order     |references   |foreign key:true|
 
 
 ## Association
