@@ -4,7 +4,7 @@
 
 |Column    |Type      |Options|
 |----------|----------| ---------|
-|email     |string    |Null: false|
+|email     |string    |Null: false, unique:true|
 |encrypted_password  |string    |Null: false|
 |nickname      |string    |Null: false|
 |first_name   |string      |Null: false|
@@ -33,14 +33,14 @@
 |user      |references |foreign key: true|
 
 ## Association
-- belongs_to :user
+- has_many :users
 - belongs_to :order
 
 # Orders
 
 |Column    |Type      |Options|
 |----------|----------| ---------|
-|address |references   |foreign key:true|
+|user |references   |foreign key:true|
 |item      |references   |foreign key:true|
 
 ## Association
