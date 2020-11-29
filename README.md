@@ -54,6 +54,7 @@
 |Column    |Type      |Options
 |----------|----------| ---------|
 |postal_code     |string    |Null: false|
+|shipping_area_id   |integer      |Null: false|
 |city     |string    |Null: false|
 |address     |string    |Null: false|
 |building     |string    ||
