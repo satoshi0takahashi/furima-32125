@@ -33,7 +33,7 @@
 |user      |references |foreign key: true|
 
 ## Association
-- has_many :users
+- belongs_to :user
 - belongs_to :order
 
 # Orders
