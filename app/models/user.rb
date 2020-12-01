@@ -9,6 +9,7 @@ class User < ApplicationRecord
          validates :first_name_katakana, presence: true, format: { with: /\A(?:\p{Katakana})+\z/}
          validates :last_name_katakana, presence: true, format: { with: /\A(?:\p{Katakana})+\z/}
          validates :birth, presence: true
-         VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])[a-z\d]{8,32}+\z/
-         validates :password, format: { with: VALID_PASSWORD_REGEX}, length: { minimum: 6 }
+         PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i
+         validates :password, format: { with: PASSWORD_REGEX }
+         validates :password_confirmation, presence: :true, format: { with: PASSWORD_REGEX }
 end
