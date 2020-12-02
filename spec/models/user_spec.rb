@@ -9,35 +9,6 @@ describe User do
       it '全項目が存在すれば登録できる' do
         expect(@user).to be_valid
       end
-      it 'emailが一意性であれば登録できる' do
-        @user.email = Faker::Internet.free_email
-        expect(@user).to be_valid
-      end
-      it 'passwordが6文字以上であれば登録できる' do
-        @user.password = 'aaa111'
-        @user.password_confirmation = 'aaa111'
-        expect(@user).to be_valid
-      end
-      it 'passwordが半角英数字混在であれば登録できる' do
-        @user.password = 'aaa111'
-        @user.password_confirmation = 'aaa111'
-        expect(@user).to be_valid
-      end
-      it 'passwordとpassword_confirmationが同じであれば登録できる' do
-        @user.password = 'aaa111'
-        @user.password_confirmation = 'aaa111'
-        expect(@user).to be_valid
-      end
-      it 'ユーザー名が全角であれば登録できる' do
-        @user.first_name = '全角'
-        @user.last_name = '太郎'
-        expect(@user).to be_valid
-      end
-      it 'ユーザー名のフリガナが全角カタカナであれば登録できる' do
-        @user.first_name_katakana = 'ゼンカク'
-        @user.last_name_katakana = 'タロウ'
-        expect(@user).to be_valid
-      end
     end
 
     context '新規登録がうまくいかないとき' do
@@ -115,16 +86,25 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
-      it 'ユーザー本名は全角じゃないと登録できない' do
+      it 'first_nameは全角じゃないと登録できない' do
         @user.first_name = Gimei.romaji
         @user.valid?
         expect(@user.errors.full_messages).to include('First name is invalid')
       end
-      it 'ユーザー本名のフリガナは全角カタカナじゃないと登録できない' do
+      it 'last_nameは全角じゃないと登録できない' do
+        @user.last_name = Gimei.romaji
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name is invalid')
+      end
+      it 'first_name_katakanaは全角カタカナじゃないと登録できない' do
         @user.first_name_katakana = Gimei.romaji
         @user.valid?
         expect(@user.errors.full_messages).to include('First name katakana is invalid')
       end
+      it 'last_name_katakanaは全角じゃないと登録できない' do
+        @user.last_name_katakana = Gimei.romaji
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Last name katakana is invalid')
     end
   end
 end
