@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :nickname, presence: true
   validates :birth, presence: true
-  with_options fformat: { with: /\A(?:\p{Katakana})+\z/ } do
+  with_options format: { with: /\A(?:\p{Katakana})+\z/ } do
     validates :first_name_katakana, presence: true
     validates :last_name_katakana, presence: true
   end
