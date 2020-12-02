@@ -19,4 +19,5 @@ class User < ApplicationRecord
     validates :password
     validates :password_confirmation, presence: :true
   end
+  has_many :items
 end
