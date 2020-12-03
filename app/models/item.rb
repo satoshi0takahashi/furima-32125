@@ -2,6 +2,9 @@ class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :user
 
+  validates :name, presence: true
+  validates :detail, presence: true
+  validates :price, presence: true
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category
   belongs_to_active_hash :status
@@ -9,7 +12,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_change
   belongs_to_active_hash :shipping_area
 
-  with_options numericality: { other_than: 1 } do
+  with_options presence: true, numericality: { other_than: 1 } do
     validates :category_id
     validates :status_id
     validates :shipping_change_id
