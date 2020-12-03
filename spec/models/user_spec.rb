@@ -105,7 +105,7 @@ describe User do
         @user.last_name_katakana = Gimei.romaji
         @user.valid?
         expect(@user.errors.full_messages).to include('Last name katakana is invalid')
+      end
     end
   end
-end
 end
