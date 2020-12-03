@@ -4,7 +4,7 @@ class Item < ApplicationRecord
 
   validates :name, presence: true
   validates :detail, presence: true
-  validates :price, presence: true
+  validates :price, presence: true, inclusion: {in: 300..9999999 }, format: { with: /\A[0-9]+\z/ }
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category
   belongs_to_active_hash :status
