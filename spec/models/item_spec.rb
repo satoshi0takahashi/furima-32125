@@ -57,6 +57,31 @@ describe Item do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
+      it 'category_idが1以外でないと登録できない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
+      end
+      it 'status_idが1以外でないと登録できない' do
+        @item.status_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Status must be other than 1')
+      end
+      it 'shipping_change_idが1以外でないと登録できない' do
+        @item.shipping_change_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Shipping change must be other than 1')
+      end
+      it 'shipping_area_idが1以外でないと登録できない' do
+        @item.shipping_area_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Shipping area must be other than 1')
+      end
+      it 'day_to_ship_idが1以外でないと登録できない' do
+        @item.day_to_ship_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Day to ship must be other than 1')
+      end
       it '価格の範囲が、¥300~¥9,999,999の間でないと登録できない' do
         @item.price = 299
         @item.valid?
