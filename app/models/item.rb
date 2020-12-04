@@ -3,9 +3,9 @@ class Item < ApplicationRecord
   belongs_to :user
 
   with_options presence: true do
-  validates :name
-  validates :detail
-  validates :image
+    validates :name
+    validates :detail
+    validates :image
   end
   validates :price, presence: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
   extend ActiveHash::Associations::ActiveRecordExtensions
