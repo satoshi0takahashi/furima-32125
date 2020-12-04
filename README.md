@@ -26,7 +26,7 @@
 |detail|text      |Null: false|
 |category_id   |integer      |Null: false|
 |status_id   |integer      |Null: false|
-|shipping_changes_id   |integer      |Null: false|
+|shipping_change_id   |integer      |Null: false|
 |shipping_area_id   |integer      |Null: false|
 |day_to_ship_id   |integer      |Null: false|
 |price   |integer      |Null: false|
