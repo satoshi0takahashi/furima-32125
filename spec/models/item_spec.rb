@@ -82,8 +82,13 @@ describe Item do
         @item.valid?
         expect(@item.errors.full_messages).to include('Day to ship must be other than 1')
       end
-      it '価格の範囲が、¥300~¥9,999,999の間でないと登録できない' do
+      it '価格の範囲が、¥300~¥9,999,999の間でないと登録できない(下限)' do
         @item.price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not included in the list')
+      end
+      it '価格の範囲が、¥300~¥9,999,999の間でないと登録できない(上限)' do
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
