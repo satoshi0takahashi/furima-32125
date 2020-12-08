@@ -23,7 +23,17 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to action: :index if @item.user_id != current_user.id
+    if @item.user_id != current_user.id
+      redirect_to :index
+    elsif user_signed_in?
+      redirect_to root_path
+    end
+    
+    if @item.order.present? && user_signed_in?
+      redirect_to root_path
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def update
