@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :correct_post,only: :index
   def index
     @item = Item.find(params[:item_id])
     @user_order = UserOrder.new
@@ -29,5 +30,18 @@ class OrdersController < ApplicationController
       card: order_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def correct_post
+    @item = Item.find(params[:item_id])
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
+
+    if @item.order.present? && user_signed_in?
+      redirect_to root_path
+    elsif user_signed_in? && @item.user_id == current_user.id
+      redirect_to root_path
+    end
   end
 end
