@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :correct_post, only: :index
   before_action :set_item, only: [:index, :create, :correct_post]
+  before_action :correct, only: :index
   def index
     @user_order = UserOrder.new
   end
@@ -17,9 +17,12 @@ class OrdersController < ApplicationController
   end
 
   private
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 
   def order_params
-    params.require(:user_order).permit(:price, :postal_code, :shipping_area_id, :city, :address, :building, :phone_number, :order_id).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:token])
+    params.require(:user_order).permit(:postal_code, :shipping_area_id, :city, :address, :building, :phone_number, :order_id).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:token])
   end
 
   def pay_item
@@ -31,7 +34,7 @@ class OrdersController < ApplicationController
     )
   end
 
-  def correct_post
+  def correct
     unless user_signed_in?
       redirect_to new_user_session_path
     end
