@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe UserOrder, type: :model do
   before do
+    @user = FactoryBot.build(:user)
+    @item = FactoryBot.build(:item)
     @user_order = FactoryBot.build(:user_order)
+    @user_order.user_id = @user.id
+    @user_order.item_id = @item.id
   end
   describe '購入' do
     context '購入がうまくいくとき' do
@@ -56,10 +60,25 @@ RSpec.describe UserOrder, type: :model do
         @user_order.valid?
         expect(@user_order.errors.full_messages).to include("Phone number is invalid")
       end
+      it '電話番号は英数字混合では登録できない' do
+        @user_order.phone_number = "11aa"
+        @user_order.valid?
+        expect(@user_order.errors.full_messages).to include("Phone number is invalid")
+      end
       it "tokenが空では登録できないこと" do
         @user_order.token = nil
         @user_order.valid?
         expect(@user_order.errors.full_messages).to include("Token can't be blank")
+      end
+      it "user_id,がないと登録できない" do
+        @user_order.user_id = nil
+        @user_order.valid?
+        expect(@user_order.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idがないと登録できない" do
+        @user_order.item_id = nil
+        @user_order.valid?
+        expect(@user_order.errors.full_messages).to include("Item can't be blank")
       end
     end
 end

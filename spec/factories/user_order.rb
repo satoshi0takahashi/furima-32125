@@ -7,6 +7,5 @@ FactoryBot.define do
     building { Gimei.town.kanji  }
     phone_number { 123 }
     token { 'tok_abcdefghijk00000000000000000' }
-
   end
 end
