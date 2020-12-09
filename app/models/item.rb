@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :user
+  has_one :order
 
   with_options presence: true do
     validates :name
@@ -8,6 +9,7 @@ class Item < ApplicationRecord
     validates :image
   end
   validates :price, presence: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category
   belongs_to_active_hash :status
