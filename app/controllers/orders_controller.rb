@@ -1,12 +1,11 @@
 class OrdersController < ApplicationController
-  before_action :correct_post,only: :index
+  before_action :correct_post, only: :index
+  before_action :set_item, only: [:index, :create, :correct_post]
   def index
-    @item = Item.find(params[:item_id])
     @user_order = UserOrder.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @user_order = UserOrder.new(order_params)
     pay_item
     @user_order.save
@@ -33,7 +32,6 @@ class OrdersController < ApplicationController
   end
 
   def correct_post
-    @item = Item.find(params[:item_id])
     unless user_signed_in?
       redirect_to new_user_session_path
     end
