@@ -15,7 +15,6 @@ class OrdersController < ApplicationController
         render :index
       end
     end
-  end
 
   private
   def set_item
