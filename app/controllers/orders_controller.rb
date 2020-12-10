@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
     pay_item
     @user_order.save
       if @user_order.valid?
-      redirect_to root_path
+        redirect_to root_path
       else
         render :index
       end
@@ -39,9 +39,7 @@ class OrdersController < ApplicationController
       redirect_to new_user_session_path
     end
 
-    if @item.order.present? && user_signed_in?
-      redirect_to root_path
-    elsif user_signed_in? && @item.user_id == current_user.id
+    if @item.order.present? && user_signed_in? || user_signed_in? && @item.user_id == current_user.id
       redirect_to root_path
     end
   end
