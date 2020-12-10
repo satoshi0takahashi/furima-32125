@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_item, only: [:index, :correct_post]
+  before_action :set_item, only: [:index, :correct]
   before_action :correct, only: :index
   def index
     @user_order = UserOrder.new
