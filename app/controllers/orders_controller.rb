@@ -1,11 +1,12 @@
 class OrdersController < ApplicationController
-  before_action :set_item, only: [:index, :create, :correct_post]
+  before_action :set_item, only: [:index, :correct_post]
   before_action :correct, only: :index
   def index
     @user_order = UserOrder.new
   end
 
   def create
+    @item = Item.find(params[:item_id])
     @user_order = UserOrder.new(order_params)
     pay_item
     @user_order.save
