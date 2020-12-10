@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.user_id == current_user.id && @item.order.present?
+    if @item.order.present? && @item.user_id == current_user.id 
       redirect_to root_path
     elsif @item.user_id != current_user.id
       redirect_to :index
