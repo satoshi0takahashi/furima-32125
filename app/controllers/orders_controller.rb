@@ -8,14 +8,14 @@ class OrdersController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     @user_order = UserOrder.new(order_params)
-    pay_item
-    @user_order.save
-      if @user_order.valid?
-        redirect_to root_path
-      else
-        render :index
-      end
+    if @user_order.valid?
+      pay_item
+      @user_order.save
+      redirect_to root_path
+    else
+      render :index
     end
+  end
 
   private
   def set_item
