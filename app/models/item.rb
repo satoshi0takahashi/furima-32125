@@ -2,6 +2,14 @@ class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :user
   has_one :order
+  has_many :comments
+  def self.search(search)
+    if search != ""
+      Item.where('name LIKE(?) OR detail LIKE(?)', "%#{search}%", "%#{search}%").order('created_at DESC')
+    else
+      Item.includes(:user).order('created_at DESC')
+    end
+  end
 
   with_options presence: true do
     validates :name
