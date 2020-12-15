@@ -17,6 +17,7 @@
 
 - has_many :items
 - has_many :orders
+- has_many :comments
 
 # Items
 
@@ -35,6 +36,7 @@
 ## Association
 - belongs_to :user
 - has_one :order
+- has_one :comments
 
 # Orders
 
@@ -48,6 +50,7 @@
 - belongs_to :user
 - belongs_to :item
 - has_one :address
+
 
 # Address
 
@@ -65,3 +68,15 @@
 ## Association
 
 - belongs_to :order
+
+# Comments
+
+|Column    |Type      |Options|
+|----------|----------| ---------|
+|user |references   |foreign key:true|
+|item      |references   |foreign key:true|
+
+## Association
+
+- belongs_to :user
+- belongs_to :item

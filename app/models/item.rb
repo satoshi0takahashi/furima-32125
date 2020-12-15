@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :user
   has_one :order
-  has_many :comments
+  has_many :comment, dependent: :destroy
   def self.search(search)
     if search != ""
       Item.where('name LIKE(?) OR detail LIKE(?)', "%#{search}%", "%#{search}%").order('created_at DESC')
